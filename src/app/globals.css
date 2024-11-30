@@ -5,10 +5,11 @@
 html,
 body {
     height: 100%;
+    background-color: black !important;
 }
 
 .wallet-adapter-button-trigger {
-    background: rgb(100, 26, 230) !important;
+    background: rgb(191, 34, 57) !important;
     border-radius: 8px !important;
     padding-left: 16px !important;
     padding-right: 16px !important;
@@ -16,4 +17,10 @@ body {
 .wallet-adapter-dropdown-list,
 .wallet-adapter-button {
     font-family: inherit !important;
+}
+
+.cus-btn-disabled[disabled]{
+    opacity: 1;
+    background-color: #33363DFF;
+    cursor: not-allowed;
 }

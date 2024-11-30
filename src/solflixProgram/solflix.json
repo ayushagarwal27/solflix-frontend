@@ -1,0 +1,392 @@
+{
+  "address": "3KeGWoiAkH8QeiJpF1T6FiLLgr8dDM966sD4kpUHcZrL",
+  "metadata": {
+    "name": "solflix",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "access_resource",
+      "discriminator": [
+        105,
+        212,
+        130,
+        207,
+        4,
+        156,
+        24,
+        176
+      ],
+      "accounts": [
+        {
+          "name": "accessor",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "maker",
+          "writable": true
+        },
+        {
+          "name": "admin",
+          "writable": true
+        },
+        {
+          "name": "access_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  99,
+                  101,
+                  115,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "resource_account.seed",
+                "account": "Create"
+              },
+              {
+                "kind": "account",
+                "path": "accessor"
+              }
+            ]
+          }
+        },
+        {
+          "name": "resource_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "resource_account.creator",
+                "account": "Create"
+              },
+              {
+                "kind": "account",
+                "path": "resource_account.seed",
+                "account": "Create"
+              }
+            ]
+          }
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_resource",
+      "discriminator": [
+        42,
+        4,
+        153,
+        170,
+        163,
+        159,
+        188,
+        194
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "create_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "seed"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "price",
+          "type": "u64"
+        },
+        {
+          "name": "num_of_days",
+          "type": "u32"
+        },
+        {
+          "name": "resource_key",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "seed",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Access",
+      "discriminator": [
+        117,
+        154,
+        108,
+        210,
+        202,
+        83,
+        96,
+        222
+      ]
+    },
+    {
+      "name": "Config",
+      "discriminator": [
+        155,
+        12,
+        170,
+        224,
+        30,
+        250,
+        204,
+        130
+      ]
+    },
+    {
+      "name": "Create",
+      "discriminator": [
+        157,
+        216,
+        244,
+        173,
+        66,
+        21,
+        151,
+        114
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "PriceCantBeZero",
+      "msg": "Price must be greater than 0"
+    },
+    {
+      "code": 6001,
+      "name": "IncorrectSizeOfResourceKey",
+      "msg": "Resource key size must be between 6 to 50 character length"
+    },
+    {
+      "code": 6002,
+      "name": "IncorrectNumOfDays",
+      "msg": "Number of days must be between 1 to 365 days"
+    },
+    {
+      "code": 6003,
+      "name": "IncorrectSeedSize",
+      "msg": "Seed size must be 31"
+    }
+  ],
+  "types": [
+    {
+      "name": "Access",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "consumer",
+            "type": "pubkey"
+          },
+          {
+            "name": "purchase_time",
+            "type": "i64"
+          },
+          {
+            "name": "num_of_days_valid",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "resource_key",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Config",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "charge_percentage",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Create",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "num_of_days",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "seed",
+            "type": "string"
+          },
+          {
+            "name": "resource_key",
+            "type": "string"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ]
+}
