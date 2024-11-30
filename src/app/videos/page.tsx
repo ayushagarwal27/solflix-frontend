@@ -81,7 +81,7 @@ const Page = () => {
     }
   }
 
-  function hexToDecimal(hexString) {
+  function hexToDecimal(hexString: string) {
     // Remove any leading "0x" if present
     if (hexString.startsWith("0x")) {
       hexString = hexString.slice(2);
@@ -98,6 +98,7 @@ const Page = () => {
     resourceHash: string,
     resourceKey: string,
   ) {
+    if (!wallet.publicKey) return;
     const accessAccount = web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("access"),
@@ -125,7 +126,7 @@ const Page = () => {
       // console.log(new Date(hexToDecimal(res.purchaseTime.toString(16))));
       // console.log(hexToDecimal(res.purchaseTime.toString(16)));
       router.push("/access?key=" + res.resourceKey);
-    } catch (err) {
+    } catch (err: any) {
       if (
         err.message ===
         "Account does not exist or has no data " + accessAccount.toString()
@@ -144,7 +145,7 @@ const Page = () => {
       [Buffer.from("create"), creator.toBytes(), Buffer.from(resourceHash)],
       programInfo.programID,
     )[0];
-
+    if (!wallet.publicKey) return;
     const accessAccount = web3.PublicKey.findProgramAddressSync(
       [
         Buffer.from("access"),
@@ -169,7 +170,7 @@ const Page = () => {
       const tx = await program.methods
         .accessResource()
         .accountsPartial({
-          accessor: wallet.publicKey,
+          accessor: wallet.publicKey ?? undefined,
           maker: creator,
           admin: new PublicKey("3vsAgrUVA9Pr8R5VUddpcYfzFhusB8JPto3SKesv3xgu"),
           resourceAccount: resource,
