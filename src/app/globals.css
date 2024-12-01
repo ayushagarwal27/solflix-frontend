@@ -19,8 +19,10 @@ body {
     font-family: inherit !important;
 }
 
+
+
 .cus-btn-disabled[disabled]{
     opacity: 1;
     background-color: #33363DFF;
-    cursor: not-allowed;
+    cursor: no-drop;
 }
