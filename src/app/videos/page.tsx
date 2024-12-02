@@ -1,16 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  useWallet,
-  useConnection,
-  AnchorWallet,
-} from "@solana/wallet-adapter-react";
-import { BN, Program, web3 } from "@coral-xyz/anchor";
+import { useWallet, useConnection } from "@solana/wallet-adapter-react";
+import { Program, web3 } from "@coral-xyz/anchor";
 import { Solflix } from "@/solflixProgram/solflix";
 import { PublicKey } from "@solana/web3.js";
 import programInfo from "../../constants/programInfo";
-import { getProvider } from "@/calls/calls";
 import { useRouter } from "next/navigation";
+import { getProvider } from "@/calls/calls";
 
 const Page = () => {
   const { connection } = useConnection();
@@ -29,7 +25,6 @@ const Page = () => {
         description: string;
       }[]
   >(null);
-  console.log(wallet);
   useEffect(() => {
     getAllCreateAccounts();
   }, []);
@@ -49,14 +44,17 @@ const Page = () => {
           filters: [{ dataSize: 400 }],
         },
       );
+
       // let config = await connection.getParsedProgramAccounts(
       //   programInfo.programID,
       //   {
       //     filters: [{ dataSize: 42 }],
       //   },
       // );
+      // @ts-ignore
       // config = await program.account.config.fetch(config[0].pubkey);
       // console.log(config);
+
       const allAccountsPromise = allAccounts.map((account) =>
         program.account.create.fetch(account.pubkey),
       );
@@ -172,7 +170,7 @@ const Page = () => {
         .accountsPartial({
           accessor: wallet.publicKey ?? undefined,
           maker: creator,
-          admin: new PublicKey("3vsAgrUVA9Pr8R5VUddpcYfzFhusB8JPto3SKesv3xgu"),
+          admin: new PublicKey("5X39uByHSMasDzri4GGMUyJENq6LftPJQbLqZczp66Kd"),
           resourceAccount: resource,
           config,
           accessAccount,
@@ -189,7 +187,7 @@ const Page = () => {
     <>
       <div
         className={
-          "grid grid-cols-3 mt-[150px] max-w-7xl mx-auto bg-black flex-wrap  gap-4 w-full"
+          "grid md:grid-cols-2 lg:grid-cols-3 mt-[150px] max-w-7xl mx-auto bg-black flex-wrap  gap-4 w-full"
         }
       >
         {createAccounts?.map(
@@ -207,14 +205,14 @@ const Page = () => {
           ) => (
             <div
               className={
-                "p-4 flex gap-4 flex-col rounded-lg border-2 border-red-600 hover:shadow-2xl hover:-translate-y-[2px] duration-200 hover:shadow-red-500"
+                "p-4 flex gap-4 flex-col min-w-[300px] rounded-lg border-2 border-red-600 hover:shadow-2xl hover:-translate-y-[2px] duration-200 hover:shadow-red-500"
               }
               key={key}
             >
               <h2 className="capitalize text-xl text-center text-red-400">
                 {title}
               </h2>
-              <p className={" py-4 px-1 rounded text-red-100 text-md"}>
+              <p className={" py-4 px-1 mt-auto rounded text-red-100 text-md"}>
                 {description}
               </p>
               <div className={"mt-auto"}>

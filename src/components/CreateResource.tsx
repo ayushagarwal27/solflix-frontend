@@ -87,11 +87,11 @@ const CreateResource: FC<CreateResourceProps> = ({ resourceKey }) => {
   return (
     <form
       className={
-        "flex flex-col gap-4 p-10 text-center border-[0.3px] border-pink-900 text-black rounded-md w-[450px]"
+        "flex flex-col gap-4 p-10 text-center border-[0.3px] border-red-800 text-white rounded-lg w-[450px]"
       }
       onSubmit={handleSubmit}
     >
-      <p>Create Resource</p>
+      <p>Video Form</p>
       <input
         type="text"
         maxLength={50}
@@ -107,6 +107,9 @@ const CreateResource: FC<CreateResourceProps> = ({ resourceKey }) => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
+      <label className={"text-xs self-start -mb-2 text-gray-400"}>
+        Price (SOL)
+      </label>
       <input
         type="number"
         min={0.5}
@@ -117,6 +120,9 @@ const CreateResource: FC<CreateResourceProps> = ({ resourceKey }) => {
         value={price}
         onChange={(e) => setPrice(Number(e.target.value))}
       />
+      <label className={"text-xs self-start -mb-2 text-gray-400"}>
+        Num of Days valid
+      </label>
       <input
         type="number"
         min={1}
@@ -127,7 +133,7 @@ const CreateResource: FC<CreateResourceProps> = ({ resourceKey }) => {
         value={numOfDays}
         onChange={(e) => setNumOfDays(Number(e.target.value))}
       />
-      <button className={"btn btn-accent"}>Submit</button>
+      <button className={"btn bg-red-700 text-white"}>Submit</button>
     </form>
   );
 };

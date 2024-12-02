@@ -14,10 +14,10 @@ export const getProvider = (connection, wallet) => {
 };
 
 export async function initializeConfig() {
+  console.log("here");
   try {
     const anchorProvider = getProvider();
-    const program =
-      new Program() < Solflix > (programInfo.idl_object, anchorProvider);
+    const program = new Program(programInfo.idl_object, anchorProvider);
     const tx = await program.methods.initialize().rpc();
     console.log(tx);
   } catch (err) {

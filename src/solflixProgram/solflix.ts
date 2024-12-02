@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/solflix.json`.
  */
 export type Solflix = {
-  "address": "3KeGWoiAkH8QeiJpF1T6FiLLgr8dDM966sD4kpUHcZrL",
+  "address": "BFpFTmDwDNygSW9iL1UErkpDGTDiJFcjZh73DJ1vRu47",
   "metadata": {
     "name": "solflix",
     "version": "0.1.0",
