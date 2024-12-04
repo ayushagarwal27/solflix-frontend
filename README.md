@@ -1,94 +1,50 @@
-# template-next-tailwind-basic
+# Solflix dApp
 
-## Getting Started
+Live Url: https://solflix-v.vercel.app/
 
-### Prerequisites
+On-Chain video rental platform. The dApp lets user to rent videos, where authentication and authorization is done via smart program deployed on Solana Devnet
 
-- Node v18.18.0 or higher
 
-- Rust v1.77.2 or higher
-- Anchor CLI 0.30.1 or higher
-- Solana CLI 1.18.17 or higher
+### Frontend Setup
 
-### Installation
 
-#### Clone the repo
-
-```shell
-git clone <repo-url>
-cd <repo-name>
+```shell 
+    pnpm i
+```
+```shell 
+    npm run dev
 ```
 
-#### Install Dependencies
-
-```shell
-pnpm install
-```
-
-#### Start the web app
+For cloudinary integration, create an account here https://cloudinary.com/ and define  keys in .env
 
 ```
-pnpm dev
-```
+NEXT_PUBLIC_CLOUDINARY_API_KEY=""
+CLOUDINARY_API_SECRET=""
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=""
+ ```
 
-## Apps
+### Libraries and Frontend Flow
 
-### anchor
+- Next.js (UI Framework)
+- Daisy UI, TawilindCss (Styling)
+- Cloudinary (Video Storage, Video Player)
+- Vercel (Deployment)
+- Solana Wallet Adapter, Anchor, web3
+    - (connecting with solana cluster, connecting wallet, sending transactions)
 
-This is a Solana program written in Rust using the Anchor framework.
+### 3 pages
+1. All Videos page
+    - get all the videos uploaded by creators
+    - send getAllAccount transaction, with specific PDA data size of `create_account`
+    - display the data in cards
 
-#### Commands
+2. Upload page
+    - enable creator to upload video on cloudinary
+    - post endpoint for same is defined under api/upload directory
+    - once uploaded, creator can enter information in form to create PDA for same
 
-You can use any normal anchor commands. Either move to the `anchor` directory and run the `anchor` command or prefix the command with `pnpm`, eg: `pnpm anchor`.
-
-#### Sync the program id:
-
-Running this command will create a new keypair in the `anchor/target/deploy` directory and save the address to the Anchor config file and update the `declare_id!` macro in the `./src/lib.rs` file of the program.
-
-You will manually need to update the constant in `anchor/lib/basic-exports.ts` to match the new program id.
-
-```shell
-pnpm anchor keys sync
-```
-
-#### Build the program:
-
-```shell
-pnpm anchor-build
-```
-
-#### Start the test validator with the program deployed:
-
-```shell
-pnpm anchor-localnet
-```
-
-#### Run the tests
-
-```shell
-pnpm anchor-test
-```
-
-#### Deploy to Devnet
-
-```shell
-pnpm anchor deploy --provider.cluster devnet
-```
-
-### web
-
-This is a React app that uses the Anchor generated client to interact with the Solana program.
-
-#### Commands
-
-Start the web app
-
-```shell
-pnpm dev
-```
-
-Build the web app
-
-```shell
-pnpm build
-```
+3. Access page
+    - Once user click on play now button of Video Card
+    - We check whether `access_account` PDA is there
+    - If PDA exists, user is redirected from homepage to access page
+    - If not, `access_account` PDA is created, deducting balance from user account and redirecting user to access page.
