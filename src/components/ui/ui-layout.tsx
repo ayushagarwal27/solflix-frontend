@@ -73,6 +73,7 @@ export function UiLayout({
               target="_blank"
               rel="noopener noreferrer"
             >
+              {" "}
               Ayush
             </a>
           </p>
