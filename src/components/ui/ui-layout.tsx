@@ -66,7 +66,7 @@ export function UiLayout({
       <footer className="footer mt-4 pb-8  footer-center p-4  bg-transparent text-base-content">
         <aside>
           <p>
-            Created by{" "}
+            Copyright © 2025
             <a
               className="link hover:text-white"
               href="https://github.com/ayushagarwal27"
@@ -185,7 +185,7 @@ export function useTransactionToast() {
           label={"View Transaction"}
           className="btn btn-xs btn-primary"
         />
-      </div>,
+      </div>
     );
   };
 }
